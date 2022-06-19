@@ -15,7 +15,7 @@ public record StatListener(Top main) implements Listener {
 
         final Player p = e.getPlayer();
 
-        if (!statManager().isInBroken(p)) { statManager().addBrokenBlock(p, 1); }
+        if (!statManager().isInBroken(p)) { statManager().addBrokenBlock(p, 1); return; }
         statManager().addBrokenBlock(p, statManager().getPlayerBrokenBlocks(p) + 1);
     }
 
