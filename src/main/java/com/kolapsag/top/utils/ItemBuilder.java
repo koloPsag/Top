@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class ItemBuilder {
+public class ItemBuilder {
 
     private final ItemStack item;
 
