@@ -1,9 +1,0 @@
-name: Top
-version: '${version}'
-main: com.kolapsag.top.Top
-api-version: 1.18
-authors: [ kolaPsag ]
-description: ♥♥♥♥
-
-commands:
-  topka:
