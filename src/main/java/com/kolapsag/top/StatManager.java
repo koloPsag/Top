@@ -29,7 +29,7 @@ public final class StatManager {
     public int getBlocksBroken(OfflinePlayer player) { return blocksBroken.get(player.getUniqueId()); }
     public int getPlayersKilled(OfflinePlayer player) { return playersKilled.get(player.getUniqueId()); }
     public int getDeaths(OfflinePlayer player) { return deaths.get(player.getUniqueId()); }
-    public boolean isInMap(Map<UUID, Integer> map, OfflinePlayer player) { return map.containsKey(player.getUniqueId()); }
+    public boolean isNotInMap(Map<UUID, Integer> map, OfflinePlayer player) { return !map.containsKey(player.getUniqueId()); }
     public Inventory getGui() { return topka; }
 
     public void saveTop(FileConfiguration conf) {
@@ -37,20 +37,17 @@ public final class StatManager {
         playersKilled.forEach((key, value) -> conf.set("PlayersKilled." + key, value));
         deaths.forEach((key, value) -> conf.set("Deaths." + key, value));
     }
-    @SuppressWarnings("ConstantConditions")
     public void retrieveTop(FileConfiguration conf) {
 
-        final String[] paths = { "BlocksBroken", "PlayersKilled", "Deaths" };
-        final Map[] assignedMaps = { blocksBroken, playersKilled, deaths };
+        final Map<String, Map<UUID, Integer>> pathMap = new HashMap<>();
+        pathMap.put("BlocksBroken", blocksBroken); pathMap.put("PlayersKilled", playersKilled); pathMap.put("Deaths", deaths);
 
-        for (int i = 0; i < paths.length; i++) {
-            final String path = paths[i];
-
+        pathMap.forEach((path, map) -> {
             if (conf.getConfigurationSection(path) != null) {
-                for (String value : conf.getConfigurationSection(path).getKeys(false)) assignedMaps[i].put(UUID.fromString(value), conf.getInt(path + "." + value));
+                for (String value : conf.getConfigurationSection(path).getKeys(false)) map.put(UUID.fromString(value), conf.getInt(path + "." + value));
                 conf.set(path, null);
             }
-        }
+        });
 
     }
 }
