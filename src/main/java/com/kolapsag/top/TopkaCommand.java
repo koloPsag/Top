@@ -62,6 +62,6 @@ public record TopkaCommand(Top main) implements CommandExecutor {
         return false;
     }
     private StatManager statManager() { return main.getStatManager(); }
+    private void buildAndClear(ItemBuilder item, List<Component> list, AtomicInteger aInt) { item.build().lore(list); list.clear(); aInt.set(0); }
     private Stream<Map.Entry<UUID, Integer>> entryMap(Map<UUID, Integer> map) { return map.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder())).limit(3); }
-    private void buildAndClear(ItemBuilder item, List<Component> list, AtomicInteger aInt) { item.build().lore(list); list.clear(); aInt.set(0);}
 }

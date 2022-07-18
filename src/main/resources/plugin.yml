@@ -1,7 +1,7 @@
 name: Top
 version: '${version}'
 main: com.kolapsag.top.Top
-api-version: 1.18
+api-version: 1.19
 authors: [ kolaPsag ]
 description: ♥♥♥♥
 

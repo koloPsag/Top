@@ -12,11 +12,10 @@ public final class Top extends JavaPlugin {
         getCommand("topka").setExecutor(new TopkaCommand(this));
         Bukkit.getPluginManager().registerEvents(new StatListener(this), this);
 
-        statManager = new StatManager();
+        statManager = new StatManager(this);
         statManager.retrieveTop(getConfig());
         saveConfig();
     }
-
     @Override
     public void onDisable() {
         statManager.saveTop(getConfig());
